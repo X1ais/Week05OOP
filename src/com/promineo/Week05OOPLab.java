@@ -6,10 +6,10 @@
 //
 package com.promineo;
 
-
-
-
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Week05OOPLab {
 
@@ -76,14 +76,14 @@ public class Week05OOPLab {
 		System.out.println("\nQuestion 2: Deck Class");
 	    // Add your code here to instantiate a Deck	
 		Deck cards = new Deck();
-		String[] suits = {"spades", "diamonds", "clubs", "hearts"};
-		String[] names = {"two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"};
-
-		for (String suit : suits) {
-			for (String n : names) {
-				cards.addCard(new Card(n, suit));
-			}
-		}
+		//		String[] suits = {"spades", "diamonds", "clubs", "hearts"};
+		//		String[] names = {"two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"};
+		//
+		//		for (String suit : suits) {
+		//			for (String n : names) {
+		//				cards.addCard(new Card(n, suit));
+		//			}
+		//		}
 
 	    
 	    
@@ -113,6 +113,12 @@ public class Week05OOPLab {
 		//		Add a draw method within the Deck Class
 		System.out.println("\nQuestion 4: Deck draw() method");
 		// Test your method here
+		List<Card> hand = new ArrayList<>();
+		hand = cards.draw();
+		
+		for (Card h : hand) {
+			h.describe();
+		}
 		
 		
 		
@@ -131,7 +137,18 @@ public class Week05OOPLab {
 		// 			and deal the cards out to the "players" in the Map.
 		System.out.println("\nQuestion 5: Create Game");
 		// Call your method here
+		int playerCount = 4;
+		Map<String,List<Card>> game = new HashMap<>();
+		game = newGame(playerCount);
 
+		for (String player : game.keySet()) {
+			System.out.println(player + "'s hand:");
+			for (Card c : game.get(player)) {
+				c.describe();
+			}
+			System.out.println(
+					);
+		}
 		
 		
 		
@@ -139,9 +156,27 @@ public class Week05OOPLab {
 		
 		
 		
-	} 
+	}
+
 	
 	// Method 5:
+	private static Map<String, List<Card>> newGame(int playerCount) {
+		Deck cards = new Deck();
+		Map<String,List<Card>> gameState = new HashMap<>();
+		int handSize = 5;
+		String[] players = new String[playerCount];
+		
+		for (int i = 0; i < playerCount; i++) {
+			players[i] = "Player " + String.valueOf(i + 1);
+		}
+		
+		cards.shuffle();
+		
+		for (int i = 0; i < playerCount; i++) {
+			gameState.put(players[i], cards.draw(handSize));
+		}
+		return gameState;
+	} 
 	
 	
 	

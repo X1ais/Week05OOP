@@ -45,7 +45,7 @@ public class Card {
 	 * Other Public Methods
 	 */
 	public void describe() {
-		System.out.println("The card is the " + name + " of " + suit + " and has a value of " + value);
+		System.out.println(name + " of " + suit);
 	}
 	
 	/*
